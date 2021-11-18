@@ -1,4 +1,4 @@
-name: learn-github-actions
+name: Build Demo Page
 on: [push]
 jobs:
   deploy:
@@ -8,9 +8,10 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: '16'
-      - run: ls .
-      - run: cd ./demo && npm install
-      - run: cd ./demo && npm run build
+      - run: npm install
+        working-directory: ./demo
+      - run: npm run build
+        working-directory: ./demo
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         if: ${{ github.ref == 'refs/heads/main' }}
